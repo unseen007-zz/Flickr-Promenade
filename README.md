@@ -1,2 +1,2 @@
-Tourist-Flickr
+Flickr-Promenade
 ==============
