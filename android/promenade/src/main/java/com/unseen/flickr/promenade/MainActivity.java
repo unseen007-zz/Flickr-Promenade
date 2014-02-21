@@ -17,6 +17,8 @@
 package com.unseen.flickr.promenade;
 
 import android.animation.ObjectAnimator;
+import android.animation.TypeEvaluator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.app.LoaderManager;
@@ -33,6 +35,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Property;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,6 +100,10 @@ public class MainActivity extends Activity implements LocationListener, View.OnC
 
             @Override
             public void onPageSelected(int i) {
+                if(mCurrentPhoto != mPhotoList.get(i)){
+                    mMap.animateCamera(CameraUpdateFactory.newLatLng(
+                            new LatLng( mPhotoList.get(i).latitude,  mPhotoList.get(i).longitude)));
+                }
                 mCurrentPhoto = mPhotoList.get(i);
             }
 
@@ -226,6 +233,7 @@ public class MainActivity extends Activity implements LocationListener, View.OnC
                     public boolean onMarkerClick(Marker marker) {
                         HttpManager.Photo p = mMarkerPhoto.get(marker);
                         toggleInfoWindow(p);
+                        animateMarker(marker, 360);
                         return true;
                     }
                 });
@@ -237,6 +245,18 @@ public class MainActivity extends Activity implements LocationListener, View.OnC
             }
         }
     }
+
+    /**
+     * Just some simple rotation for fun
+     * @param marker
+     * @param endScale
+     */
+    static void animateMarker(Marker marker, float endScale) {
+        ObjectAnimator.ofFloat(marker, "rotation", marker.getRotation() + endScale)
+                .setDuration(200)
+                .start();
+    }
+
 
     private void initLocation(){
         String bestAvailableProvider = LocationUtils.getBestProvider(this);
@@ -448,6 +468,12 @@ public class MainActivity extends Activity implements LocationListener, View.OnC
                     .width(5)
                     .geodesic(true)
                     .color(Color.BLUE));
+
+            mPhotoList = promenade;
+
+            mAdapter = new PhotoDetailsPagerAdapter(promenade);
+            mViewPager.setCurrentItem(0, false);
+            mViewPager.setAdapter(mAdapter);
         }
     }
 
@@ -465,6 +491,11 @@ public class MainActivity extends Activity implements LocationListener, View.OnC
                 return mPromenade.size();
             }
             return 0;
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
         }
 
         @Override
@@ -500,6 +531,10 @@ public class MainActivity extends Activity implements LocationListener, View.OnC
         @Override
         public void startUpdate(ViewGroup arg0) {}
 
+
+        public void setPromenade(List<HttpManager.Photo> promenade) {
+            this.mPromenade = promenade;
+        }
     }
 
 }
