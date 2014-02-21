@@ -31,15 +31,15 @@ public class FlickPhotoLoader extends AsyncTaskLoader<HttpManager.PhotoResponse>
 
     private HttpManager.PhotoResponse mResponse;
 
-    private float mLatitude;
-    private float mLongitude;
+    private double mLatitude;
+    private double mLongitude;
 
     public FlickPhotoLoader(Context context, Bundle bundle) {
         super(context);
 
         if(bundle != null){
-            mLatitude = bundle.getFloat(PARAM_LATITUDE);
-            mLongitude = bundle.getFloat(PARAM_LONGITUDE);
+            mLatitude = bundle.getDouble(PARAM_LATITUDE);
+            mLongitude = bundle.getDouble(PARAM_LONGITUDE);
         }
     }
 

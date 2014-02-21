@@ -1,0 +1,29 @@
+To compile the project you must need :
+- Android Studio
+- Gradle
+- Maven
+
+////////
+
+To have the correct config files, you must :
+
+- Add a class looking like this in package : com.unseen.flickr.promenade.utils
+    You have to put your FlickR API key
+
+public class Config {
+    /** FlickR Api Key */
+    public static final String FLICKR_KEY = "********";
+}
+
+- Add a xml file in the values of your resources (src/main/res/values/config.xml)
+   You have to put your Google Maps API key
+
+<resources>
+    <string name="google_play_services_key">*******</string>
+</resources>
+
+
+/////////
+
+Just run the application via the Android Studio launcher, or with gradle commands
+

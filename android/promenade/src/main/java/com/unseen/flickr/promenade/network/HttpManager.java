@@ -26,10 +26,10 @@ public interface HttpManager {
 
     static final String API_URL = "http://api.flickr.com/services/rest";
 
-    @GET("/?method=flickr.photos.search&api_key=" + Config.FLICKR_KEY + "&license=1%2C2%2C3%2C4%2C5%2C6%2C7&sort=+interestingness-desc&privacy_filter=1&safe_search=1&media=photos&has_geo=1&radius=30&radius_units=km&extras=description%2Cowner_name%2Cdate_taken%2Cgeo&per_page=100&page=1&format=json&nojsoncallback=1")
+    @GET("/?method=flickr.photos.search&api_key=" + Config.FLICKR_KEY + "&license=1%2C2%2C3%2C4%2C5%2C6%2C7&sort=+interestingness-desc&privacy_filter=1&safe_search=1&media=photos&has_geo=1&radius=10&radius_units=km&extras=description%2Cowner_name%2Cdate_taken%2Cgeo&per_page=100&page=1&format=json&nojsoncallback=1")
     PhotoResponse getPopularPhotos(
-            @Query("lat") float latitude,
-            @Query("lon") float longitude
+            @Query("lat") double latitude,
+            @Query("lon") double longitude
     );
 
     public static class PhotoResponse{
@@ -42,11 +42,28 @@ public interface HttpManager {
 
     public static class Photo {
         public String id;
+        public String secret;
+        public String server;
+        public String farm;
         public String title;
-        public float lat;
-        public float lon;
-        private String datetime;
-        private Description description;
+        public String ownername;
+        public String datetaken;
+        public double latitude;
+        public double longitude;
+        public Description description;
+
+        public String getImageSqUrl(){
+            return "http://farm"+farm+".staticflickr.com/"+server+"/"+id+"_"+secret+"_s.jpg";
+        }
+
+        public String getImageLSqUrl(){
+            return "http://farm"+farm+".staticflickr.com/"+server+"/"+id+"_"+secret+"_q.jpg";
+        }
+
+        public String getImageLUrl(){
+            return "http://farm"+farm+".staticflickr.com/"+server+"/"+id+"_"+secret+"_b.jpg";
+        }
+
     }
 
     public static class Description {

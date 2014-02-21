@@ -23,8 +23,12 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <string name="promenade_button">Launch Promenade</string>
+
     <!-- -->
     <string name="information">Information</string>
     <string name="error_no_internet">Please enable your internet connection first.</string>
+    <string name="error_no_gps">Please enable your GPS first.</string>
+    <string name="error_loading_data">An error occured, please try again.</string>
 
 </resources>

@@ -27,3 +27,6 @@ proguard/
 *.ipr
 *.iws
 .idea/
+
+/android/promenade/src/main/java/com/unseen/flickr/promenade/utils/Config.java
+/android/promenade/src/main/res/values/config.xml
