@@ -3,9 +3,11 @@ package com.unseen.flickr.promenade;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -56,7 +58,17 @@ public class PreviewPhotoActivity extends Activity{
             return;
         }
 
-        Picasso.with(this).load(url).placeholder(R.drawable.ic_launcher).into(((ImageView) findViewById(R.id.preview_photo)));
+        Picasso.with(this).load(url).placeholder(R.drawable.ic_launcher).into((ImageView) findViewById(R.id.preview_photo), new Callback() {
+            @Override
+            public void onSuccess() {
+                findViewById(R.id.progressBar).setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onError() {
+                findViewById(R.id.progressBar).setVisibility(View.GONE);
+            }
+        });
 
         ((TextView) findViewById(R.id.preview_title)).setText(title);
         ((TextView) findViewById(R.id.preview_owner)).setText(owner);

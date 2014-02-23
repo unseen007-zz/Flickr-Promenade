@@ -27,3 +27,15 @@ public class Config {
 
 Just run the application via the Android Studio launcher, or with gradle commands
 
+/////////
+
+This app allows to find the closest FlickR images.
+
+On the first screen, you'll find a list of images.
+When you click on an image you have some details at the bottom of your screen.
+
+If you click on that banner, you'll be taken to the real photo with owner, and description of the picture.
+
+The button with the feet, creates a promenade path for you to take, to visit all waypoints.
+
+

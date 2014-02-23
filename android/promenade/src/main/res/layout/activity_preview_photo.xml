@@ -58,4 +58,13 @@
 
     </LinearLayout>
 
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        android:layout_margin="0dp"
+        android:indeterminate="true"
+        android:id="@+id/progressBar"/>
+
 </RelativeLayout>

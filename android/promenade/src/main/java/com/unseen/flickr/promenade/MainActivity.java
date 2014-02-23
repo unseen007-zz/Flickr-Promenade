@@ -299,7 +299,7 @@ public class MainActivity extends Activity implements LocationListener, View.OnC
     @Override
     public void onLocationChanged(Location location) {
         Log.d(TAG, "xx onLocationChanged" + location);
-        if(mShouldReloadData){
+        if(mShouldReloadData || mPhotoList == null){
             if(checkReady()){
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
             }
